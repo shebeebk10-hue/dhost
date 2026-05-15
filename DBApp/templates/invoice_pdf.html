@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+
+            font-family: "Segoe UI", Arial, sans-serif;
+            background:#f3f4f6;
+            color:#1f2937;
+
+            display:flex;
+            justify-content:center;
+            align-items:flex-start;
+
+            min-height:100vh;
+            padding:40px 20px;
+
+        }
+
+        .invoice-box{
+
+            width:100%;
+            max-width:900px;
+
+            background:#ffffff;
+            padding:50px;
+
+            border-radius:14px;
+            border:1px solid #e5e7eb;
+
+            box-shadow:0 4px 18px rgba(0,0,0,0.05);
+
+        }
+
+        /* HEADER */
+
+        .header{
+
+            display:flex;
+            justify-content:space-between;
+            align-items:flex-start;
+            margin-bottom:40px;
+
+        }
+
+        .brand{
+
+            font-size:34px;
+            font-weight:700;
+            letter-spacing:1px;
+            color:#111827;
+
+        }
+
+        .sub-text{
+
+            margin-top:6px;
+            font-size:14px;
+            color:#6b7280;
+            line-height:22px;
+
+        }
+
+        .invoice-title{
+
+            text-align:right;
+
+        }
+
+        .invoice-title h1{
+
+            font-size:34px;
+            color:#111827;
+            margin-bottom:8px;
+
+        }
+
+        .invoice-title p{
+
+            font-size:14px;
+            color:#6b7280;
+
+        }
+
+        /* TOP INFO */
+
+        .top-info{
+
+            width:100%;
+            border-collapse:collapse;
+            margin-bottom:35px;
+
+        }
+
+        .top-info td{
+
+            padding:14px 0;
+            font-size:15px;
+
+        }
+
+        .top-info tr{
+
+            border-bottom:1px solid #e5e7eb;
+
+        }
+
+        .label{
+
+            color:#6b7280;
+            width:170px;
+
+        }
+
+        .value{
+
+            font-weight:600;
+            color:#111827;
+
+        }
+
+        .right{
+
+            text-align:right;
+
+        }
+
+        /* MAIN TABLE */
+
+        .invoice-table{
+
+            width:100%;
+            border-collapse:collapse;
+            margin-top:15px;
+
+        }
+
+        .invoice-table thead{
+
+            background:#111827;
+
+        }
+
+        .invoice-table th{
+
+            color:#ffffff;
+            padding:16px 18px;
+            font-size:14px;
+            font-weight:600;
+            letter-spacing:.5px;
+            text-transform:uppercase;
+
+        }
+
+        .invoice-table td{
+
+            padding:18px;
+            font-size:15px;
+            border-bottom:1px solid #e5e7eb;
+            vertical-align:middle;
+
+        }
+
+        .invoice-table tbody tr:hover{
+
+            background:#f9fafb;
+
+        }
+
+        /* PERFECT ALIGNMENT */
+
+        .text-center{
+
+            text-align:center;
+
+        }
+
+        .text-right{
+
+            text-align:right;
+            font-variant-numeric: tabular-nums;
+            white-space:nowrap;
+
+        }
+
+        /* SUMMARY */
+
+        .summary{
+
+            width:360px;
+            margin-left:auto;
+            margin-top:35px;
+
+        }
+
+        .summary table{
+
+            width:100%;
+            border-collapse:collapse;
+
+        }
+
+        .summary td{
+
+            padding:14px 0;
+            font-size:15px;
+
+        }
+
+        .summary tr{
+
+            border-bottom:1px solid #e5e7eb;
+
+        }
+
+        .summary .name{
+
+            color:#6b7280;
+
+        }
+
+        .summary .amount{
+
+            text-align:right;
+            font-weight:600;
+            font-variant-numeric: tabular-nums;
+
+        }
+
+        .grand-total{
+
+            border-top:2px solid #111827;
+            border-bottom:none !important;
+
+        }
+
+        .grand-total td{
+
+            padding-top:18px;
+            font-size:18px;
+            font-weight:700;
+            color:#111827;
+
+        }
+
+        /* FOOTER */
+
+        .footer{
+
+            margin-top:70px;
+            padding-top:25px;
+            border-top:1px solid #e5e7eb;
+
+        }
+
+        .thankyou{
+
+            font-size:16px;
+            font-weight:600;
+            margin-bottom:10px;
+
+        }
+
+        .footer-text{
+
+            color:#6b7280;
+            font-size:13px;
+            line-height:24px;
+
+        }
+
+        /* SIGNATURE */
+
+        .signature{
+
+            margin-top:60px;
+            text-align:right;
+
+        }
+
+        .signature-line{
+
+            width:220px;
+            border-top:1px solid #111827;
+            margin-left:auto;
+            margin-bottom:10px;
+
+        }
+
+        .signature-text{
+
+            font-size:14px;
+            font-weight:600;
+            color:#111827;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="invoice-box">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div>
+
+            <div class="brand">
+                DOST CHICKEN
+            </div>
+
+            <div class="sub-text">
+                Fresh Chicken Supplier <br>
+                Quality & Trusted Service
+            </div>
+
+        </div>
+
+        <div class="invoice-title">
+
+            <h1>INVOICE</h1>
+
+            <p>
+                Invoice No :
+                <strong>{{ invoice.invoice_number }}</strong>
+            </p>
+
+            <p>
+                Date :
+                <strong>{{ invoice.date }}</strong>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- TOP INFO -->
+
+    <table class="top-info">
+
+        <tr>
+
+            <td class="label">
+                Shop Name
+            </td>
+
+            <td class="value">
+                {{ invoice.shop.name }}
+            </td>
+
+            <td class="label right">
+                Payment Status
+            </td>
+
+            <td class="value right">
+
+                {% if invoice.closing_balance == 0 %}
+                    Paid
+                {% else %}
+                    Pending
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <!-- MAIN TABLE -->
+
+    <table class="invoice-table">
+
+        <thead>
+
+            <tr>
+
+                <th>Item</th>
+                <th class="text-center">Qty</th>
+                <th class="text-center">Weight</th>
+                <th class="text-right">Rate</th>
+                <th class="text-right">Total</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>
+                    {{ invoice.item_name }}
+                </td>
+
+                <td class="text-center">
+                    {{ invoice.qty }}
+                </td>
+
+                <td class="text-center">
+                    {{ invoice.weight }} Kg
+                </td>
+
+                <td class="text-right">
+                    {{ invoice.rate }}
+                </td>
+
+                <td class="text-right">
+                    {{ invoice.total_amount }}
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+
+    <!-- SUMMARY -->
+
+    <div class="summary">
+
+        <table>
+
+            <tr>
+
+                <td class="name">
+                    Paid Amount
+                </td>
+
+                <td class="amount">
+                    {{ invoice.paid_amount }}
+                </td>
+
+            </tr>
+
+            <tr class="grand-total">
+
+                <td>
+                    Closing Balance
+                </td>
+
+                <td class="amount">
+                    {{ invoice.closing_balance }}
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <!-- SIGNATURE -->
+
+    <div class="signature">
+
+        <div class="signature-line"></div>
+
+        <div class="signature-text">
+            Authorized Signature
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        <div class="thankyou">
+            Thank you for your business.
+        </div>
+
+        <div class="footer-text">
+
+            DOST CHICKEN <br>
+            Fresh Quality Chicken Supply
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
