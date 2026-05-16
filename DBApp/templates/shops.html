@@ -122,6 +122,35 @@
             color: var(--primary-orange);
         }
 
+        .shop-grid .col {
+    flex: 0 0 20%;
+    max-width: 20%;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+    .shop-grid .col {
+        flex: 0 0 33.33%;
+        max-width: 33.33%;
+    }
+}
+
+/* Small tablet */
+@media (max-width: 768px) {
+    .shop-grid .col {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .shop-grid .col {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -163,18 +192,19 @@
 
     <!-- Main Content: Shop Grid -->
     <main class="container mb-5">
-        <div class="row g-4">
+        <div class="row g-4 shop-grid">
             <!-- Loop for 10 Shops -->
             
-            <div class="col-6 col-md-4 col-lg-2.4" style="flex: 0 0 auto; width: 20%;">
+            <div class="col">
                 <!-- Use standard grid for smaller screens, 5 columns for desktop -->
                 <a href="{% url 'view_details' 1 %}" class="shop-card">
-    <i class="fas fa-store"></i>
-    <p class="shop-name">Twaiba Chicken</p>
-</a>
+                    <i class="fas fa-store"></i>
+                    <p class="shop-name">Twaiba Chicken</p>
+                </a>
 
             </div>
-               <div class="col-6 col-md-4 col-lg-2.4" style="flex: 0 0 auto; width: 20%;">
+
+               <div class="col">
                 <!-- Use standard grid for smaller screens, 5 columns for desktop -->
                 <a href="{% url 'view_details' 2 %}" class="shop-card">
     <i class="fas fa-store"></i>
@@ -182,7 +212,7 @@
 </a>
 
             </div>
-               <div class="col-6 col-md-4 col-lg-2.4" style="flex: 0 0 auto; width: 20%;">
+              <div class="col">
                 <!-- Use standard grid for smaller screens, 5 columns for desktop -->
                 <a href="{% url 'view_details' 3 %}" class="shop-card">
     <i class="fas fa-store"></i>
@@ -190,7 +220,7 @@
 </a>
 
             </div>
-               <div class="col-6 col-md-4 col-lg-2.4" style="flex: 0 0 auto; width: 20%;">
+               <div class="col">
                 <!-- Use standard grid for smaller screens, 5 columns for desktop -->
                 <a href="{% url 'view_details' 4 %}" class="shop-card">
     <i class="fas fa-store"></i>
@@ -198,7 +228,7 @@
 </a>
 
             </div>
-               <div class="col-6 col-md-4 col-lg-2.4" style="flex: 0 0 auto; width: 20%;">
+               <div class="col">
                 <!-- Use standard grid for smaller screens, 5 columns for desktop -->
                 <a href="{% url 'view_details' 5 %}" class="shop-card">
     <i class="fas fa-store"></i>
@@ -206,7 +236,7 @@
 </a>
 
             </div>
-               <div class="col-6 col-md-4 col-lg-2.4" style="flex: 0 0 auto; width: 20%;">
+               <div class="col">
                 <!-- Use standard grid for smaller screens, 5 columns for desktop -->
                 <a href="{% url 'view_details' 6 %}" class="shop-card">
     <i class="fas fa-store"></i>
@@ -214,7 +244,7 @@
 </a>
 
             </div>
-               <div class="col-6 col-md-4 col-lg-2.4" style="flex: 0 0 auto; width: 20%;">
+               <div class="col">
                 <!-- Use standard grid for smaller screens, 5 columns for desktop -->
                 <a href="{% url 'view_details' 7 %}" class="shop-card">
     <i class="fas fa-store"></i>
@@ -222,7 +252,7 @@
 </a>
 
             </div>
-               <div class="col-6 col-md-4 col-lg-2.4" style="flex: 0 0 auto; width: 20%;">
+               <div class="col">
                 <!-- Use standard grid for smaller screens, 5 columns for desktop -->
                 <a href="{% url 'view_details' 8 %}" class="shop-card">
     <i class="fas fa-store"></i>
@@ -231,7 +261,7 @@
 
             </div>
 
-               <div class="col-6 col-md-4 col-lg-2.4" style="flex: 0 0 auto; width: 20%;">
+               <div class="col">
                 <!-- Use standard grid for smaller screens, 5 columns for desktop -->
                 <a href="{% url 'view_details' 9 %}" class="shop-card">
     <i class="fas fa-store"></i>
@@ -240,7 +270,7 @@
 
             </div>
 
-               <div class="col-6 col-md-4 col-lg-2.4" style="flex: 0 0 auto; width: 20%;">
+               <div class="col">
                 <!-- Use standard grid for smaller screens, 5 columns for desktop -->
                 <a href="{% url 'view_details' 10 %}" class="shop-card">
     <i class="fas fa-store"></i>

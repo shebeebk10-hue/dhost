@@ -155,31 +155,233 @@ def download_invoice(request, id):
 
     invoice = get_object_or_404(Invoice, id=id)
 
-    template = get_template('invoice_pdf.html')
+    html = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
 
-    html = template.render({
+        <style>
 
-        'invoice': invoice
+            @page {{
+                margin: 15mm;
+            }}
 
-    })
+            body {{
+                font-family: Arial, sans-serif;
+                color: #111827;
+                font-size: 12px;
+            }}
+
+            .container {{
+                width: 100%;
+            }}
+
+            /* HEADER */
+            .header {{
+                width: 100%;
+                border-bottom: 1px solid #e5e7eb;
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+            }}
+
+            .header-table {{
+                width: 100%;
+            }}
+
+            .brand {{
+                font-size: 22px;
+                font-weight: bold;
+            }}
+
+            .sub {{
+                font-size: 12px;
+                color: #6b7280;
+                margin-top: 3px;
+            }}
+
+            .invoice-title {{
+                text-align: right;
+                font-size: 20px;
+                font-weight: bold;
+            }}
+
+            .meta {{
+                width: 100%;
+                margin-top: 20px;
+                border-collapse: collapse;
+            }}
+
+            .meta td {{
+                padding: 8px;
+                border: 1px solid #e5e7eb;
+            }}
+
+            .label {{
+                color: #6b7280;
+                width: 120px;
+            }}
+
+            /* TABLE */
+            .items {{
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }}
+
+            .items th {{
+                background: #111827;
+                color: white;
+                padding: 10px;
+                font-size: 11px;
+            }}
+
+            .items td {{
+                padding: 10px;
+                border-bottom: 1px solid #e5e7eb;
+                text-align: center;
+            }}
+
+            .right {{
+                text-align: right;
+            }}
+
+            /* SUMMARY */
+            .summary {{
+                width: 300px;
+                margin-left: auto;
+                margin-top: 20px;
+            }}
+
+            .summary table {{
+                width: 100%;
+                border-collapse: collapse;
+            }}
+
+            .summary td {{
+                padding: 6px;
+            }}
+
+            .total {{
+                font-size: 14px;
+                font-weight: bold;
+            }}
+
+            /* FOOTER */
+            .footer {{
+                margin-top: 50px;
+                text-align: center;
+                font-size: 11px;
+                color: #6b7280;
+            }}
+
+            .signature {{
+                margin-top: 40px;
+                text-align: right;
+            }}
+
+            .line {{
+                width: 180px;
+                border-top: 1px solid #111827;
+                margin-left: auto;
+                margin-bottom: 5px;
+            }}
+
+        </style>
+    </head>
+
+    <body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header">
+            <table class="header-table">
+                <tr>
+                    <td>
+                        <div class="brand">DOST CHICKEN</div>
+                        <div class="sub">Fresh Chicken Supplier</div>
+                        <div class="sub">Quality & Trusted Service</div>
+                    </td>
+
+                    <td class="invoice-title">
+                        INVOICE <br><br>
+                        #{invoice.invoice_number} <br>
+                        {invoice.date}
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- META -->
+        <table class="meta">
+            <tr>
+                <td class="label">Shop Name</td>
+                <td>{invoice.shop.name}</td>
+
+                <td class="label">Status</td>
+                <td>
+                    {"Paid" if invoice.closing_balance == 0 else "Pending"}
+                </td>
+            </tr>
+        </table>
+
+        <!-- ITEMS -->
+        <table class="items">
+            <tr>
+                <th>ITEM</th>
+                <th>QTY</th>
+                <th>WEIGHT</th>
+                <th>RATE</th>
+                <th>TOTAL</th>
+            </tr>
+
+            <tr>
+                <td>{invoice.item_name}</td>
+                <td>{invoice.qty}</td>
+                <td>{invoice.weight} Kg</td>
+                <td>{invoice.rate}</td>
+                <td>{invoice.total_amount}</td>
+            </tr>
+        </table>
+
+        <!-- SUMMARY -->
+        <div class="summary">
+            <table>
+                <tr>
+                    <td>Paid Amount</td>
+                    <td class="right">{invoice.paid_amount}</td>
+                </tr>
+
+                <tr>
+                    <td class="total">Closing Balance</td>
+                    <td class="right total">{invoice.closing_balance}</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- SIGNATURE -->
+        <div class="signature">
+            <div class="line"></div>
+            Authorized Signature
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            Thank you for your business.<br>
+            DOST CHICKEN - Fresh Quality Chicken Supply
+        </div>
+
+    </div>
+
+    </body>
+    </html>
+    """
 
     response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="invoice_{invoice.invoice_number}.pdf"'
 
-    response['Content-Disposition'] = (
-        f'attachment; filename="invoice_{invoice.invoice_number}.pdf"'
-    )
-
-    pisa_status = pisa.CreatePDF(
-
-        html,
-
-        dest=response
-
-    )
-
-    if pisa_status.err:
-
-        return HttpResponse('Error generating PDF')
+    pisa.CreatePDF(html, dest=response)
 
     return response
 
