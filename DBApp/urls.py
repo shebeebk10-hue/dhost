@@ -14,4 +14,5 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('shops-auth/', views.shops_auth, name='shops_auth'),
     path('shops/', views.shops, name='shops'),
+    path('create-admin/', views.create_admin),
 ]

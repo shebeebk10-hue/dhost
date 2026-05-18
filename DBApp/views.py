@@ -430,3 +430,14 @@ def delete_invoice(request, id):
         invoice.delete()
 
     return redirect('view_details', id=shop_id)
+
+from django.contrib.auth.models import User
+
+
+def create_admin(request):
+    User.objects.create_superuser(
+        username='admin',
+        password='admin123',
+        email='admin@gmail.com'
+    )
+    return HttpResponse("Admin created")
