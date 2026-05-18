@@ -438,6 +438,6 @@ def create_admin(request):
     User.objects.create_superuser(
         username='admin',
         password='admin123',
-        email='admin@gmail.com'
+        email='shebeebk10@gmail.com'
     )
     return HttpResponse("Admin created")
