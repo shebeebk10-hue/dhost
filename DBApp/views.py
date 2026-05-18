@@ -19,7 +19,7 @@ def shops_auth(request):
     ERROR = ""
 
     # Your fixed password
-    SECRET_PASSWORD = "1234"
+    SECRET_PASSWORD = "dhost5511"
 
     if request.method == "POST":
 
