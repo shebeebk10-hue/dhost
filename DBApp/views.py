@@ -426,12 +426,10 @@ def delete_invoice(request, id):
     shop_id = invoice.shop.id
 
     if request.method == 'POST':
-
         invoice.delete()
+        return redirect('view_details', id=shop_id)
 
-    return redirect('view_details', id=shop_id)
-
-from django.contrib.auth.models import User
+    return render(request, 'confirm_delete.html', {'invoice': invoice})
 
 
 def create_admin(request):
