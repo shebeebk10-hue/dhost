@@ -437,21 +437,14 @@
 
     </a>
 
-    <form action="{% url 'delete_invoice' inv.id %}"
-          method="POST"
-          style="display:inline;">
+   <a href="{% url 'delete_invoice' inv.id %}"
+   class="glass-btn delete-btn"
+   style="display:inline-flex; text-decoration:none;">
 
-        {% csrf_token %}
+    <i class="fas fa-trash"></i>
+    &nbsp;Delete
 
-        <button type="submit"
-                class="glass-btn delete-btn">
-
-            <i class="fas fa-trash"></i>
-            Delete
-
-        </button>
-
-    </form>
+</a>
 
 </div>
 
