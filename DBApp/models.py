@@ -31,6 +31,13 @@ class Invoice(models.Model):
 
     total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
+    # NEW
+    previous_balance = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    # NEW
+    current_balance = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    # FINAL BALANCE
     closing_balance = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     def __str__(self):

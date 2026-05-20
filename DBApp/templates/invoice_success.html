@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Processing Invoice</title>
+</head>
+
+<body>
+
+<script>
+
+    // First download PDF in same tab
+    window.location.href = "/download-invoice/{{ invoice.id }}/";
+
+    // Then go back after 2 seconds
+    setTimeout(function() {
+
+        window.location.href = "/view-details/{{ invoice.shop.id }}/";
+
+    }, 2000);
+
+</script>
+
+</body>
+</html>

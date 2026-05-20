@@ -113,33 +113,39 @@ def add_invoice(request, id):
             request.POST.get('paid_amount')
         )
 
-        closing = previous_balance + total - paid
+        current_balance = total - paid
+        
+        closing = previous_balance + current_balance
 
         invoice = Invoice.objects.create(
 
-            shop=shop,
+    shop=shop,
 
-            invoice_number=request.POST.get('invoice_number'),
+    invoice_number=request.POST.get('invoice_number'),
 
-            date=request.POST.get('date'),
+    date=request.POST.get('date'),
 
-            item_name=request.POST.get('item_name'),
+    item_name=request.POST.get('item_name'),
 
-            qty=int(request.POST.get('qty')),
+    qty=int(request.POST.get('qty')),
 
-            weight=Decimal(request.POST.get('weight')),
+    weight=Decimal(request.POST.get('weight')),
 
-            rate=Decimal(request.POST.get('rate')),
+    rate=Decimal(request.POST.get('rate')),
 
-            paid_amount=paid,
+    paid_amount=paid,
 
-            total_amount=total,
+    total_amount=total,
 
-            closing_balance=closing
+    previous_balance=previous_balance,
 
-        )
+    current_balance=current_balance,
 
-        return redirect('download_invoice', id=invoice.id)
+    closing_balance=closing
+
+)
+
+        return redirect('invoice_success', id=invoice.id)
 
     return render(request, 'add_invoice.html', {
 
@@ -348,16 +354,26 @@ def download_invoice(request, id):
         <!-- SUMMARY -->
         <div class="summary">
             <table>
-                <tr>
-                    <td>Paid Amount</td>
-                    <td class="right">{invoice.paid_amount}</td>
-                </tr>
+    <tr>
+        <td>Previous Balance</td>
+        <td class="right">{invoice.previous_balance}</td>
+    </tr>
 
-                <tr>
-                    <td class="total">Closing Balance</td>
-                    <td class="right total">{invoice.closing_balance}</td>
-                </tr>
-            </table>
+    <tr>
+        <td>Paid Amount</td>
+        <td class="right">{invoice.paid_amount}</td>
+    </tr>
+
+    <tr>
+        <td>Current Balance</td>
+        <td class="right">{invoice.current_balance}</td>
+    </tr>
+
+    <tr>
+        <td class="total">Closing Balance</td>
+        <td class="right total">{invoice.closing_balance}</td>
+    </tr>
+</table>
         </div>
 
         <!-- SIGNATURE -->
@@ -379,11 +395,21 @@ def download_invoice(request, id):
     """
 
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename="invoice_{invoice.invoice_number}.pdf"'
-
+    response['Content-Disposition'] = (
+        f'attachment; filename="invoice_{invoice.invoice_number}.pdf"'
+        )
     pisa.CreatePDF(html, dest=response)
-
+    response['Refresh'] = f'1; url=/view_details/{invoice.shop.id}/'
     return response
+
+
+def invoice_success(request, id):
+
+    invoice = get_object_or_404(Invoice, id=id)
+
+    return render(request, 'invoice_success.html', {
+        'invoice': invoice
+    })
 
 
 # EDIT INVOICE
