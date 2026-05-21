@@ -62,16 +62,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'web_project.wsgi.application'
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dhost',
-        'USER': 'postgres',
-        'PASSWORD': 'abcd3232',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-
+    'default': dj_database_url.config(
+        conn_max_age=600,
+        ssl_require=True
+    )
+}  
 
 LANGUAGE_CODE = 'en-us'
 
