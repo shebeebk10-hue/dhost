@@ -311,6 +311,14 @@
     }
 }
 
+.clickable-row{
+    cursor:pointer;
+}
+
+.clickable-row:hover{
+    background:rgba(255,255,255,0.06);
+}
+
     </style>
 </head>
 
@@ -409,7 +417,7 @@
 
                     {% for inv in invoices %}
 
-                    <tr>
+                    <tr class="clickable-row"data-url="{% url 'download_invoice' inv.id %}">
 
                         <td data-label="Date">{{ inv.date }}</td>
                         <td data-label="Invoice">#{{ inv.invoice_number }}</td>
@@ -428,25 +436,18 @@
                             <div class="actions">
 
                                 <div class="actions">
+                                    <a href="{% url 'edit_invoice' inv.id %}"class="glass-btn edit-btn">
+                                        <i class="fas fa-pen"></i>
+                                        Edit
+                                    </a>
 
-    <a href="{% url 'edit_invoice' inv.id %}"
-       class="glass-btn edit-btn">
+                                    <a href="{% url 'delete_invoice' inv.id %}"class="glass-btn delete-btn"style="display:inline-flex; text-decoration:none;">
 
-        <i class="fas fa-pen"></i>
-        Edit
+                                        <i class="fas fa-trash"></i>
+                                        &nbsp;Delete
 
-    </a>
-
-   <a href="{% url 'delete_invoice' inv.id %}"
-   class="glass-btn delete-btn"
-   style="display:inline-flex; text-decoration:none;">
-
-    <i class="fas fa-trash"></i>
-    &nbsp;Delete
-
-</a>
-
-</div>
+                                    </a>
+                                </div>
 
                             </div>
 
@@ -488,6 +489,28 @@
 
     </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+document.querySelectorAll('.clickable-row')
+.forEach(row => {
+
+    row.addEventListener('click', function(e) {
+
+        if (
+            e.target.closest('a') ||
+            e.target.closest('button')
+        ) {
+            return;
+        }
+
+        window.location.href =
+            this.dataset.url;
+    });
+
+});
+
+</script>
 
 </body>
 </html>

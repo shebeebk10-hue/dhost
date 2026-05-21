@@ -8,6 +8,8 @@ from .models import Invoice, Shop
 
 from decimal import Decimal
 
+from django.contrib.auth.models import User
+
 
 # HOME
 
@@ -399,7 +401,6 @@ def download_invoice(request, id):
         f'attachment; filename="invoice_{invoice.invoice_number}.pdf"'
         )
     pisa.CreatePDF(html, dest=response)
-    response['Refresh'] = f'1; url=/view_details/{invoice.shop.id}/'
     return response
 
 
@@ -443,7 +444,16 @@ def edit_invoice(request, id):
     })
 
 
-# DELETE INVOICE
+
+
+
+def create_admin(request):
+    User.objects.create_superuser(
+        username='admin',
+        password='abcd3232',
+        email='shebeebk10@gmail.com'
+    )
+    return HttpResponse("Admin created")
 
 def delete_invoice(request, id):
 
@@ -452,16 +462,16 @@ def delete_invoice(request, id):
     shop_id = invoice.shop.id
 
     if request.method == 'POST':
+
         invoice.delete()
-        return redirect('view_details', id=shop_id)
 
-    return render(request, 'confirm_delete.html', {'invoice': invoice})
+        return redirect(
+            'view_details',
+            id=shop_id
+        )
 
-
-def create_admin(request):
-    User.objects.create_superuser(
-        username='admin',
-        password='admin123',
-        email='shebeebk10@gmail.com'
+    return render(
+        request,
+        'confirm_delete.html',
+        {'invoice': invoice}
     )
-    return HttpResponse("Admin created")

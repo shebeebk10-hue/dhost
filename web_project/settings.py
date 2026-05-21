@@ -12,8 +12,11 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 DEBUG = os.environ.get("DEBUG") == "True"
 
-ALLOWED_HOSTS = ['.onrender.com']
-
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'DBApp.onrender.com',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -59,9 +62,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'web_project.wsgi.application'
 
 DATABASES = {
-    'default': dj_database_url.parse(
-        os.environ.get("DATABASE_URL")
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dhost',
+        'USER': 'postgres',
+        'PASSWORD': 'abcd3232',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
 
 
@@ -80,3 +88,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
