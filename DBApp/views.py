@@ -366,10 +366,7 @@ def download_invoice(request, id):
         <td class="right">{invoice.paid_amount}</td>
     </tr>
 
-    <tr>
-        <td>Current Balance</td>
-        <td class="right">{invoice.current_balance}</td>
-    </tr>
+    
 
     <tr>
         <td class="total">Closing Balance</td>
