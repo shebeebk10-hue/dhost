@@ -307,7 +307,7 @@ def download_invoice(request, id):
             <table class="header-table">
                 <tr>
                     <td>
-                        <div class="brand">DOST CHICKEN</div>
+                        <div class="brand">DHOST CHICKEN</div>
                         <div class="sub">Fresh Chicken Supplier</div>
                         <div class="sub">Quality & Trusted Service</div>
                     </td>
@@ -384,7 +384,7 @@ def download_invoice(request, id):
         <!-- FOOTER -->
         <div class="footer">
             Thank you for your business.<br>
-            DOST CHICKEN - Fresh Quality Chicken Supply
+            DHOST CHICKEN - Fresh Quality Chicken Supply
         </div>
 
     </div>
