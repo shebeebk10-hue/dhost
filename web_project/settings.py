@@ -10,21 +10,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+DEBUG=False
 
 ALLOWED_HOSTS = [
-    ".onrender.com",
+    ".up.railway.app",
     "localhost",
     "127.0.0.1",
 ]
 
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://187.127.185.143',
-    'http://localhost',
-    'http://127.0.0.1',
-     "http://187.127.185.143",
-    "http://187.127.185.143:8000",
+    "https://your-project.up.railway.app",
 ]
 
 INSTALLED_APPS = [

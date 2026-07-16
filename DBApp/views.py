@@ -21,7 +21,7 @@ def shops_auth(request):
     ERROR = ""
 
     # Your fixed password
-    SECRET_PASSWORD = "dost5511"
+    SECRET_PASSWORD = os.environ.get("SHOP_PASSWORD")
 
     if request.method == "POST":
 
@@ -444,13 +444,16 @@ def edit_invoice(request, id):
 
 
 
-def create_admin(request):
-    User.objects.create_superuser(
-        username='admin',
-        password='abcd3232',
-        email='shebeebk10@gmail.com'
-    )
-    return HttpResponse("Admin created")
+# def create_admin(request):
+#     User.objects.create_superuser(
+#         username='admin',
+#         password='abcd3232',
+#         email='shebeebk10@gmail.com'
+#     )
+#     return HttpResponse("Admin created")
+
+
+
 
 def delete_invoice(request, id):
 
