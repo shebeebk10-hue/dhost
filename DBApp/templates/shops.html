@@ -203,95 +203,16 @@
 
     <!-- Main Content: Shop Grid -->
     <main class="container mb-5">
-        <div class="row g-4 shop-grid">
-            <!-- Loop for 10 Shops -->
-            
-            <div class="col">
-                <!-- Use standard grid for smaller screens, 5 columns for desktop -->
-                <a href="{% url 'view_details' 1 %}" class="shop-card">
-                    <i class="fas fa-store"></i>
-                    <p class="shop-name">Twaiba Chicken</p>
-                </a>
-
-            </div>
-
-               <div class="col">
-                <!-- Use standard grid for smaller screens, 5 columns for desktop -->
-                <a href="{% url 'view_details' 2 %}" class="shop-card">
-    <i class="fas fa-store"></i>
-    <p class="shop-name">MC Chicken</p>
-</a>
-
-            </div>
-              <div class="col">
-                <!-- Use standard grid for smaller screens, 5 columns for desktop -->
-                <a href="{% url 'view_details' 3 %}" class="shop-card">
-    <i class="fas fa-store"></i>
-    <p class="shop-name">Malabari Chicken</p>
-</a>
-
-            </div>
-               <div class="col">
-                <!-- Use standard grid for smaller screens, 5 columns for desktop -->
-                <a href="{% url 'view_details' 4 %}" class="shop-card">
-    <i class="fas fa-store"></i>
-    <p class="shop-name">Shop 4</p>
-</a>
-
-            </div>
-               <div class="col">
-                <!-- Use standard grid for smaller screens, 5 columns for desktop -->
-                <a href="{% url 'view_details' 5 %}" class="shop-card">
-    <i class="fas fa-store"></i>
-    <p class="shop-name">Shop 5</p>
-</a>
-
-            </div>
-               <div class="col">
-                <!-- Use standard grid for smaller screens, 5 columns for desktop -->
-                <a href="{% url 'view_details' 6 %}" class="shop-card">
-    <i class="fas fa-store"></i>
-    <p class="shop-name">Shop 6</p>
-</a>
-
-            </div>
-               <div class="col">
-                <!-- Use standard grid for smaller screens, 5 columns for desktop -->
-                <a href="{% url 'view_details' 7 %}" class="shop-card">
-    <i class="fas fa-store"></i>
-    <p class="shop-name">Shop 7</p>
-</a>
-
-            </div>
-               <div class="col">
-                <!-- Use standard grid for smaller screens, 5 columns for desktop -->
-                <a href="{% url 'view_details' 8 %}" class="shop-card">
-    <i class="fas fa-store"></i>
-    <p class="shop-name">Shop 8</p>
-</a>
-
-            </div>
-
-               <div class="col">
-                <!-- Use standard grid for smaller screens, 5 columns for desktop -->
-                <a href="{% url 'view_details' 9 %}" class="shop-card">
-    <i class="fas fa-store"></i>
-    <p class="shop-name">Shop 9</p>
-</a>
-
-            </div>
-
-               <div class="col">
-                <!-- Use standard grid for smaller screens, 5 columns for desktop -->
-                <a href="{% url 'view_details' 10 %}" class="shop-card">
-    <i class="fas fa-store"></i>
-    <p class="shop-name">Shop 10</p>
-</a>
-
-            </div>
-          
-            <!-- Logic Note: If the 5-column width above behaves oddly on mobile, use col-lg-3 or col-lg-4 -->
-        </div>
+       <div class="row g-4 shop-grid">
+    {% for shop in shops %}
+    <div class="col">
+        <a href="{% url 'view_details' shop.id %}" class="shop-card">
+            <i class="fas fa-store"></i>
+            <p class="shop-name">{{ shop.name }}</p>
+        </a>
+    </div>
+    {% endfor %}
+</div>
     </main>
 
     <!-- Footer -->

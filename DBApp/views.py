@@ -446,15 +446,6 @@ def edit_invoice(request, id):
 
 
 
-# def create_admin(request):
-#     User.objects.create_superuser(
-#         username='admin',
-#         password='abcd3232',
-#         email='shebeebk10@gmail.com'
-#     )
-#     return HttpResponse("Admin created")
-
-
 
 
 def delete_invoice(request, id):
