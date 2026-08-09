@@ -14,14 +14,13 @@ DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 
 ALLOWED_HOSTS = [
-    ".up.railway.app",
+    "dhost-d6c0.onrender.com",
     "localhost",
     "127.0.0.1",
 ]
 
-
 CSRF_TRUSTED_ORIGINS = [
-    "https://your-project.up.railway.app",
+    "https://dhost-d6c0.onrender.com",
 ]
 
 INSTALLED_APPS = [
